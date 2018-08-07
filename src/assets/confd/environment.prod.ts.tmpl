@@ -1,10 +1,10 @@
 export const environment = {
   production: true,
-  gatewayUrl: '{{ getv "/imisight/gatewayUrl" "http://localhost:3001" }}',
+  gatewayUrl: '{{ getv "/imisight/gatewayUrl" "https://gw.sat.imisight.net" }}',
   auth0: {
-    domain: '{{ getv "/imisight/auth0/domain" "satimisighta.auth0.com" }}',
+    domain: '{{ getv "/imisight/auth0/domain" "imisight-sat.auth0.com" }}',
     clientId: '{{ getv "/imisight/auth0/clientId" "KXLTbs08LtLqrbPwSgn7Ioej0aMB7tf6" }}',
-    audience: '{{ getv "/imisight/auth0/audience" "http://localhost:3001/api" }}',
+    audience: '{{ getv "/imisight/auth0/audience" "https://gw.sat.imisight.net" }}',
     redirect: '{{ getv "/imisight/auth0/redirect" "http://localhost:4200/callback" }}',
     home: '{{ getv "/imisight/auth0/home" "http://localhost:4200" }}',
     scope: 'openid profile'
