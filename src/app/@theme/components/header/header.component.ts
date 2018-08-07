@@ -1,6 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
+
 import { AuthService } from './../../../@auth/auth.service';
+
+import { environment } from './../../../../environments/environment';
+
 
 @Component({
   selector: 'ngx-header',
@@ -9,11 +13,8 @@ import { AuthService } from './../../../@auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-
   @Input() position = 'normal';
-
   user: any;
-
   userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
   constructor(private sidebarService: NbSidebarService,
@@ -39,7 +40,7 @@ export class HeaderComponent implements OnInit {
   }
 
   goToHome() {
-    this.menuService.navigateHome();
+    window.location.href =  environment.homepage;
   }
 
   startSearch() {

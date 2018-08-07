@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  homepage: 'http://imisight.net',
   gatewayUrl: 'https://gw.sat.imisight.net',
   auth0: {
     domain: 'imisight-sat.auth0.com',

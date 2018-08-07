@@ -2,6 +2,7 @@
 src = "environment.prod.ts.tmpl"
 dest = "/opt/imisight-sat-upload/src/environments/environment.prod.ts"
 keys = [
+  "imisight/homepage",
 	"/imisight/gatewayUrl",
   "/imisight/auth0/clientId",
   "/imisight/auth0/domain",
