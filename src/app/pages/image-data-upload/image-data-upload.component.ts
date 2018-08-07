@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { ImageDataUploadService } from './image-data-upload.service';
 
@@ -13,7 +14,10 @@ export class ImageDataUploadComponent implements OnInit {
   geoFile: any;
   isUploading = false;
 
-  constructor(formBuilder: FormBuilder, private uploadService: ImageDataUploadService) {
+  constructor(public formBuilder: FormBuilder,
+              private uploadService: ImageDataUploadService,
+              private spinner: NgxSpinnerService) {
+
     this.dataForm = formBuilder.group({
       geoFile: '',
       fileName: '',
@@ -30,6 +34,7 @@ export class ImageDataUploadComponent implements OnInit {
 
   performUpload(ev: any) {
     this.isUploading = true;
+    this.spinner.show();
     const formData = new FormData();
     // Populate FormData object with values from FORM
     Object.keys(this.dataForm.value).forEach(k => {
@@ -50,6 +55,7 @@ export class ImageDataUploadComponent implements OnInit {
     this.uploadService.save(formData).subscribe(
       () => {
         this.isUploading = false;
+        this.spinner.hide();
         this.dataForm.reset();
         console.log('Image data saved successfully');
       },
