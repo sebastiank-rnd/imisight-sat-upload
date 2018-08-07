@@ -1,0 +1,95 @@
+<div class="row">
+   <div class="col-md-6">
+      <nb-card>
+         <nb-card-header>Upload New Image Data</nb-card-header>
+         <nb-card-body>
+            <form novalidate [formGroup]="dataForm" (ngSubmit)="performUpload($event)">
+               <div class="form-group row">
+                  <label for="geo-image" class="col-sm-3 col-form-label">Imagefile (GeoTIF)</label>
+                  <div class="col-sm-9">
+                     <input type="file"
+                     id="geo-image"
+                     class="form-control"
+                     formControlName="geoFile"
+                     (change)="updateGeoFile($event)"
+                     [formControl]="dataForm.controls['geoFile']"
+                     aria-required="true">
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label for="geo-image-text" class="col-sm-3 col-form-label">Image Filename</label>
+                  <div class="col-sm-9">
+                     <input type="text"
+                        id="geo-image-text"
+                        class="form-control"
+                        formControlName="fileName">
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label for="capture-date" class="col-sm-3 col-form-label">Capture Date</label>
+                  <div class="col-sm-9">
+                     <input type="date"
+                        id="capture-date"
+                        class="form-control"
+                        formControlName="timestamp"
+                        [formControl]="dataForm.controls['timestamp']"
+                        aria-required="true">
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label for="image-data-type" class="col-sm-3 col-form-label">Type</label>
+                  <div class="col-sm-9">
+                     <select id="image-data-type"
+                        class="form-control"
+                        formControlName="dataType"
+                        [formControl]="dataForm.controls['dataType']"
+                        aria-required="true">
+                        <option value="orthophoto">Orthophoto</option>
+                        <option value="dtm">DTM</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label for="usage-type" class="col-sm-3 col-form-label">Legal Usage</label>
+                  <div class="col-sm-9">
+                     <select id="usage-type"
+                        class="form-control"
+                        formControlName="legalUsage"
+                        [formControl]="dataForm.controls['legalUsage']"
+                        aria-required="true">
+                        <option value="free">Free</option>
+                        <option value="transpetro">Transpetro</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label for="sensor-name" class="col-sm-3 col-form-label">Sensor Name</label>
+                  <div class="col-sm-9">
+                     <input type="text"
+                        id="sensor-name"
+                        class="form-control"
+                        formControlName="sensorName"
+                        [formControl]="dataForm.controls['sensorName']"
+                        aria-required="true">
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label for="company" class="col-sm-3 col-form-label">Company</label>
+                  <div class="col-sm-9">
+                     <input type="text"
+                        id="company"
+                        class="form-control"
+                        formControlName="company"
+                        [formControl]="dataForm.controls['company']">
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <div class="offset-sm-3 col-sm-9">
+                     <button type="submit" class="btn btn-primary" [disabled]="!dataForm.valid || isUploading">{{isUploading?"Uploading":"Upload"}}</button>
+                  </div>
+               </div>
+            </form>
+         </nb-card-body>
+      </nb-card>
+   </div>
+</div>

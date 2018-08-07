@@ -1,0 +1,12 @@
+[template]
+src = "environment.ts.tmpl"
+dest = "/opt/imisight-sat-upload/src/environments/environment.ts"
+keys = [
+	"/imisight/gatewayUrl",
+  "/imisight/auth0/clientId",
+  "/imisight/auth0/domain",
+  "/imisight/auth0/audience",
+  "/imisight/auth0/redirect",
+  "/imisight/auth0/home",
+  "info/token"
+]

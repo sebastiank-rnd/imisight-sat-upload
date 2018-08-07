@@ -1,0 +1,61 @@
+function (user, context, callback) {
+
+  // if (context.clientName !== 'imisight dev rsa') {
+
+   //  return callback(null, user, context);
+
+  // }
+
+   var namespace = 'https://imisight-sat.net/';
+
+
+   context.idToken[namespace + "companyId"] = (user.app_metadata && user.app_metadata.companyId) ||
+                                               (user.user_metadata && user.user_metadata.companyId);
+
+   context.idToken[namespace + "app_metadata"] = user.app_metadata;
+
+   context.idToken[namespace + "identities"] = user.identities;
+
+   context.idToken[namespace + "email"] = user.email;
+
+   context.idToken[namespace + "email_verified"] = user.email_verified;
+
+   context.idToken[namespace + "user_id"] = user.user_id;
+
+   context.idToken[namespace + "created_at"] = user.created_at;
+
+   context.idToken[namespace + "updated_at"] = user.updated_at;
+
+   context.idToken[namespace + "picture"] = user.picture;
+
+   context.idToken[namespace + "name"] = user.name;
+
+   context.idToken[namespace + "nickname"] = user.nickname;
+
+
+
+   context.accessToken[namespace + "app_metadata"] = user.app_metadata;
+
+   context.accessToken[namespace + "identities"] = user.identities;
+
+   context.accessToken[namespace + "email"] = user.email;
+
+   context.accessToken[namespace + "email_verified"] = user.email_verified;
+
+   context.accessToken[namespace + "user_id"] = user.user_id;
+
+   context.accessToken[namespace + "created_at"] = user.created_at;
+
+   context.accessToken[namespace + "updated_at"] = user.updated_at;
+
+   context.accessToken[namespace + "picture"] = user.picture;
+
+   context.accessToken[namespace + "name"] = user.name;
+
+   context.accessToken[namespace + "nickname"] = user.nickname;
+
+
+
+   callback(null, user, context);
+
+ }
