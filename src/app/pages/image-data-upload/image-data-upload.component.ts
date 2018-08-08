@@ -22,10 +22,10 @@ export class ImageDataUploadComponent implements OnInit {
       geoFile: '',
       fileName: '',
       timestamp: [null, Validators.required],
-      dataType: [null, Validators.required],
-      legalUsage: '',
+      // dataType: [null, Validators.required],
+      // legalUsage: '',
       sensorName: '',
-      company: ''
+      // company: ''
     });
   }
 

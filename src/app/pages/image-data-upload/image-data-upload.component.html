@@ -9,7 +9,7 @@
          <nb-card-body>
             <form novalidate [formGroup]="dataForm" (ngSubmit)="performUpload($event)">
                <div class="form-group row">
-                  <label for="geo-image" class="col-sm-3 col-form-label">Imagefile (GeoTIF)</label>
+                  <label for="geo-image" class="col-sm-3 col-form-label">Imagefile (GeoTIF)<span class="star">*</span></label>
                   <div class="col-sm-9">
                      <input type="file"
                      id="geo-image"
@@ -21,7 +21,7 @@
                   </div>
                </div>
                <div class="form-group row">
-                  <label for="geo-image-text" class="col-sm-3 col-form-label">Image Filename</label>
+                  <label for="geo-image-text" class="col-sm-3 col-form-label">Image Filename<span class="star">*</span></label>
                   <div class="col-sm-9">
                      <input type="text"
                         id="geo-image-text"
@@ -30,7 +30,7 @@
                   </div>
                </div>
                <div class="form-group row">
-                  <label for="capture-date" class="col-sm-3 col-form-label">Capture Date</label>
+                  <label for="capture-date" class="col-sm-3 col-form-label">Capture Date<span class="star">*</span></label>
                   <div class="col-sm-9">
                      <input type="date"
                         id="capture-date"

@@ -130,13 +130,15 @@ export class AuthService {
     return this._profile$.getValue();
   }
 
-  get loggedIn$() {
-    return this._loggedIn$.asObservable();
-  }
+  // get loggedIn$() {
+  //   return this._loggedIn$.asObservable();
+  // }
 
   get profile$() {
     return this._profile$.asObservable();
   }
+
+  readonly loggedIn$ = this._loggedIn$.asObservable();
 
   get authenticated() : boolean {
     const OK = this._loggedIn$.getValue();

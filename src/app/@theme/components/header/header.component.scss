@@ -37,10 +37,6 @@
       }
     }
     .logo {
-      // background-image: url('./../../../../assets/images/logo-big.png') 50% / 100%;
-
-      //background-repeat: no-repeat;
-
       padding: 0 nb-theme(padding);
       font-size: 1.9rem;
       font-weight: nb-theme(font-weight-bolder);
@@ -60,9 +56,6 @@
         vertical-align: top;
         width: 50%;
         cursor: pointer;
-        /* max width */
-        //opacity: 0;
-        /* make it transparent */
       }
     }
   }
