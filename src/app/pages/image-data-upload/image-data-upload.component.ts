@@ -5,12 +5,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ImageDataUploadService } from './image-data-upload.service';
 import { AuthService } from './../../@auth/auth.service';
 
-const parseJwt = (token) => {
-  var base64Url = token.split('.')[1];
-  var base64 = base64Url.replace('-', '+').replace('_', '/');
-  return JSON.parse(window.atob(base64));
-};
-
 @Component({
   selector: 'ngx-image-data-upload',
   templateUrl: './image-data-upload.component.html',
@@ -27,7 +21,7 @@ export class ImageDataUploadComponent implements OnInit {
     private uploadService: ImageDataUploadService,
     private spinner: NgxSpinnerService) {
 
-    this.token =parseJwt(auth.idToken);
+    this.token = auth.parseJwt(auth.idToken);
 
     this.dataForm = formBuilder.group({
       geoFile: '',
