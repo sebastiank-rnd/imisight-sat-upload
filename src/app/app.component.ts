@@ -11,16 +11,16 @@ import { AuthService } from './@auth/auth.service';
   selector: 'ngx-app',
   template: `
     <ngx-sample-layout>
-      <nb-menu [items]="menu$ | async"></nb-menu>
+      
       <router-outlet></router-outlet>
     </ngx-sample-layout>
   `,
 })
 export class AppComponent implements OnInit {
   loggedInSub: Subscription;
-  menu = MENU_ITEMS;
-  menu$ : Observable<NbMenuItem[]>;
-
+  //menu = MENU_ITEMS;
+  //menu$ : Observable<NbMenuItem[]>;
+//<nb-menu [items]="menu$ | async"></nb-menu>
   constructor(private _auth : AuthService) {
   }
 
@@ -58,6 +58,6 @@ export class AppComponent implements OnInit {
       )
     );
 
-    this.menu$ = loggedin$.pipe(race(loggedOut$), startWith(MENU_ITEMS));
+    //this.menu$ = loggedin$.pipe(race(loggedOut$), startWith(MENU_ITEMS));
   }
 }

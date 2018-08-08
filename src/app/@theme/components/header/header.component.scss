@@ -37,28 +37,31 @@
       }
     }
     .logo {
-      background-image: url('./../../../../assets/images/logo-big.png') 50% / 100%;
+      // background-image: url('./../../../../assets/images/logo-big.png') 50% / 100%;
 
-      background-repeat: no-repeat;
+      //background-repeat: no-repeat;
 
       padding: 0 nb-theme(padding);
-      font-size: 1.75rem;
+      font-size: 1.9rem;
       font-weight: nb-theme(font-weight-bolder);
       @include nb-ltr(border-left,
       1px solid nb-theme(separator));
       @include nb-rtl(border-right,
       1px solid nb-theme(separator));
       white-space: nowrap;
-      cursor: pointer;
+      //cursor: pointer;
 
       span {
         font-weight: nb-theme(font-weight-normal);
+        padding: 0 nb-theme(padding);
+        vertical-align: sub;
       }
       img {
         vertical-align: top;
-        width: 100%;
+        width: 50%;
+        cursor: pointer;
         /* max width */
-        opacity: 0;
+        //opacity: 0;
         /* make it transparent */
       }
     }

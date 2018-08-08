@@ -15,8 +15,8 @@ export class HeaderComponent implements OnInit {
 
   @Input() position = 'normal';
   user: any;
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
-
+  userMenu = [ { title: 'Log out' }]; //{ title: 'Profile' },
+  
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private auth: AuthService) {
@@ -27,6 +27,13 @@ export class HeaderComponent implements OnInit {
     this.auth.profile$.subscribe((profile: any) => {
       this.user = profile;
     });
+    this.menuService.onItemClick().subscribe(
+      (event) => {
+        if (event.item.title == "Log out") {
+          this.auth.logout();
+        }
+      }
+    )
   }
 
   toggleSidebar(): boolean {
