@@ -24,7 +24,7 @@ export class ImageDataUploadComponent implements OnInit {
       timestamp: [null, Validators.required],
       dataType: 'orthophoto',
       legalUsage: '',
-      sensorName: 'xxx',
+      sensorName: 'unknown',
       company: ''
     });
   }
