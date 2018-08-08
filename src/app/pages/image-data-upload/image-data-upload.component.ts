@@ -3,6 +3,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { ImageDataUploadService } from './image-data-upload.service';
+import { AuthService } from './../../@auth/auth.service';
+
+const parseJwt = (token) => {
+  var base64Url = token.split('.')[1];
+  var base64 = base64Url.replace('-', '+').replace('_', '/');
+  return JSON.parse(window.atob(base64));
+};
 
 @Component({
   selector: 'ngx-image-data-upload',
@@ -10,13 +17,17 @@ import { ImageDataUploadService } from './image-data-upload.service';
   styleUrls: ['./image-data-upload.component.scss']
 })
 export class ImageDataUploadComponent implements OnInit {
+  token: any;
   dataForm: FormGroup;
   geoFile: any;
   isUploading = false;
 
   constructor(public formBuilder: FormBuilder,
+    private auth: AuthService,
     private uploadService: ImageDataUploadService,
     private spinner: NgxSpinnerService) {
+
+    this.token =parseJwt(auth.idToken);
 
     this.dataForm = formBuilder.group({
       geoFile: '',
@@ -25,8 +36,8 @@ export class ImageDataUploadComponent implements OnInit {
       dataType: 'orthophoto',
       legalUsage: '',
       sensorName: 'Unknown',
-      company: ''
-    });
+      company: this.token['https://imisight.net/user_metadata'].companyId
+        });
   }
 
   ngOnInit() {
