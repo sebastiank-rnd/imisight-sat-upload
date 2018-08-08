@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-admin-demo": {
+    "imisight-sat-upload": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -74,18 +74,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngx-admin-demo:build"
+            "browserTarget": "imisight-sat-upload:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-admin-demo:build:production"
+              "browserTarget": "imisight-sat-upload:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-admin-demo:build"
+            "browserTarget": "imisight-sat-upload:build"
           }
         },
         "test": {
@@ -142,7 +142,7 @@
         }
       }
     },
-    "ngx-admin-demo-e2e": {
+    "imisight-sat-upload-e2e": {
       "root": "",
       "sourceRoot": "",
       "projectType": "application",
@@ -151,7 +151,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "ngx-admin-demo:serve"
+            "devServerTarget": "imisight-sat-upload:serve"
           }
         },
         "lint": {
@@ -166,7 +166,7 @@
       }
     }
   },
-  "defaultProject": "ngx-admin-demo",
+  "defaultProject": "imisight-sat-upload",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "ngx",
