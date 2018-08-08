@@ -22,10 +22,10 @@ export class ImageDataUploadComponent implements OnInit {
       geoFile: '',
       fileName: '',
       timestamp: [null, Validators.required],
-      // dataType: [null, Validators.required],
-      // legalUsage: '',
-      sensorName: '',
-      // company: ''
+      dataType: 'orthophoto',
+      legalUsage: '',
+      sensorName: 'xxx',
+      company: ''
     });
   }
 
@@ -61,7 +61,8 @@ export class ImageDataUploadComponent implements OnInit {
       },
       error => {
         this.isUploading = false;
-        console.error('Error - Save image data failed');
+        this.spinner.hide();
+        console.error('Error - Save image data failed', error);
       }
     );
   }
