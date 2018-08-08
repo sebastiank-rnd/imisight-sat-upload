@@ -15,8 +15,8 @@ export class ImageDataUploadComponent implements OnInit {
   isUploading = false;
 
   constructor(public formBuilder: FormBuilder,
-              private uploadService: ImageDataUploadService,
-              private spinner: NgxSpinnerService) {
+    private uploadService: ImageDataUploadService,
+    private spinner: NgxSpinnerService) {
 
     this.dataForm = formBuilder.group({
       geoFile: '',
@@ -24,7 +24,7 @@ export class ImageDataUploadComponent implements OnInit {
       timestamp: [null, Validators.required],
       dataType: 'orthophoto',
       legalUsage: '',
-      sensorName: 'unknown',
+      sensorName: 'Unknown',
       company: ''
     });
   }
@@ -38,14 +38,16 @@ export class ImageDataUploadComponent implements OnInit {
     const formData = new FormData();
     // Populate FormData object with values from FORM
     Object.keys(this.dataForm.value).forEach(k => {
-      if (k === 'geojson') {
-        formData.append(k, JSON.stringify(JSON.parse(this.dataForm.value[k].replace(/(\r\n|\n|\r)/gm, ''))));
-      } else if (k === 'metaData') {
+      if (k === 'metaData') {
         formData.append(k, JSON.stringify(this.dataForm.value[k]));
       } else if (k === 'timestamp') {
         formData.append(k, JSON.parse(JSON.stringify(new Date(this.dataForm.value[k]))));
       } else {
         formData.append(k, this.dataForm.value[k]);
+      }
+
+      if (k === 'geojson') {
+        formData.append(k, JSON.stringify(JSON.parse(this.dataForm.value[k].replace(/(\r\n|\n|\r)/gm, ''))));
       }
     });
     if (this.geoFile) {
@@ -56,7 +58,7 @@ export class ImageDataUploadComponent implements OnInit {
       () => {
         this.isUploading = false;
         this.spinner.hide();
-        this.dataForm.reset();
+        //this.dataForm.reset();
         console.log('Image data saved successfully');
       },
       error => {
@@ -69,6 +71,6 @@ export class ImageDataUploadComponent implements OnInit {
 
   updateGeoFile(event) {
     this.geoFile = event.target.files[0];
-    this.dataForm.updateValueAndValidity({onlySelf: true, emitEvent: true});
+    this.dataForm.updateValueAndValidity({ onlySelf: true, emitEvent: true });
   }
 }
