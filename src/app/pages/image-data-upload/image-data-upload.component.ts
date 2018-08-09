@@ -44,7 +44,7 @@ export class ImageDataUploadComponent implements OnInit {
     this.isUploading = true;
     this.spinner.show();
     this.alertSuccess = false;
-    this.alertSuccess = false;
+    this.alertFailure = false;
 
     const formData = new FormData();
     // Populate FormData object with values from FORM
