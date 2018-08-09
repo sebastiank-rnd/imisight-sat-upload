@@ -39,10 +39,28 @@ label {
     margin-bottom: 1rem;
   }
 
+  nb-alert {
+    div {
+      display: block;
+      transition: all .4s ease-out;
+     }
+  }
+
+  nb-alert.visible {
+    display: block;
+  }
+
+  nb-alert.hidden {
+    display: none;
+  }
+
+
   .form-inline > * {
     @include nb-ltr(margin, 0 1.5rem 1.5rem 0);
     @include nb-rtl(margin, 0 0 1.5rem 1.5rem);
   }
+
+
 
   nb-card.inline-form-card nb-card-body {
     padding-bottom: 0;

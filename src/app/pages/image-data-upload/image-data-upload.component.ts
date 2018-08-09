@@ -15,6 +15,9 @@ export class ImageDataUploadComponent implements OnInit {
   dataForm: FormGroup;
   geoFile: any;
   isUploading = false;
+  alertSuccess = false;
+  alertFailure = false;
+
 
   constructor(public formBuilder: FormBuilder,
     private auth: AuthService,
@@ -40,6 +43,9 @@ export class ImageDataUploadComponent implements OnInit {
   performUpload(ev: any) {
     this.isUploading = true;
     this.spinner.show();
+    this.alertSuccess = false;
+    this.alertSuccess = false;
+
     const formData = new FormData();
     // Populate FormData object with values from FORM
     Object.keys(this.dataForm.value).forEach(k => {
@@ -63,12 +69,16 @@ export class ImageDataUploadComponent implements OnInit {
       () => {
         this.isUploading = false;
         this.spinner.hide();
+        this.alertSuccess = true;
+        // setTimeout(() => this.alertSuccess = false, 5000);
         //this.dataForm.reset();
         console.log('Image data saved successfully');
       },
       error => {
         this.isUploading = false;
         this.spinner.hide();
+        this.alertFailure = true;
+        // setTimeout(() => this.alertFailure = false, 5000);
         console.error('Error - Save image data failed', error);
       }
     );

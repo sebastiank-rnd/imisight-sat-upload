@@ -1,5 +1,11 @@
 <div class="row">
    <div class="col-md-6">
+   <nb-alert  *ngIf="alertSuccess" status="success" closable (close)="alertSuccess = false">
+    Image was succesfully uploaded
+   </nb-alert>
+      <nb-alert *ngIf="alertFailure" status="danger" closable (close)="alertFailure = false">
+    Image failed to upload!
+   </nb-alert>
       <ngx-spinner
         loadingText="Uploading image ..."
         size="large">
