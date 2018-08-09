@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpRequest, HttpEventType } from '@angular/common/http';
 
 import { throwError, Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap, map, last } from 'rxjs/operators';
 
 import { IA3DataItem } from './IA3DataItem';
 import { environment } from '../../../environments/environment';
@@ -15,12 +15,18 @@ export class ImageDataUploadService {
 
   constructor(private httpClient: HttpClient) {  }
 
-  public save(imageData: FormData): Observable < IA3DataItem > {
+  public save(imageData: FormData): Observable <HttpEvent<IA3DataItem>> {
 
-    return this.httpClient.post < IA3DataItem > (this.baseUrl, imageData)
-    .pipe(
-      catchError(this._handleError)
+    const req = new HttpRequest(
+      'POST',
+      this.baseUrl,
+      imageData,
+      {
+        reportProgress: true,
+      },
     );
+
+    return this.httpClient.request<IA3DataItem>(req);
   }
 
   public fetch(): Observable < IA3DataItem[] > {

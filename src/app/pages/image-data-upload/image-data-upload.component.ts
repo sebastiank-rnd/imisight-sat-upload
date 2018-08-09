@@ -1,9 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
+
+import { throwError } from 'rxjs';
+import { catchError, tap, map, last } from 'rxjs/operators';
+
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { ImageDataUploadService } from './image-data-upload.service';
 import { AuthService } from './../../@auth/auth.service';
+
+import { IA3DataItem } from './IA3DataItem';
+import { getLocaleDateTimeFormat } from '../../../../node_modules/@angular/common';
+
 
 @Component({
   selector: 'ngx-image-data-upload',
@@ -14,6 +23,7 @@ export class ImageDataUploadComponent implements OnInit {
   token: any;
   dataForm: FormGroup;
   geoFile: any;
+  uploadProgress = 0;
   isUploading = false;
   alertSuccess = false;
   alertFailure = false;
@@ -34,7 +44,7 @@ export class ImageDataUploadComponent implements OnInit {
       legalUsage: '',
       sensorName: 'Unknown',
       company: this.token['https://imisight.net/user_metadata'].companyId
-        });
+    });
   }
 
   ngOnInit() {
@@ -46,6 +56,7 @@ export class ImageDataUploadComponent implements OnInit {
     this.alertSuccess = false;
     this.alertFailure = false;
 
+    const startTime = Date.now();
     const formData = new FormData();
     // Populate FormData object with values from FORM
     Object.keys(this.dataForm.value).forEach(k => {
@@ -65,23 +76,49 @@ export class ImageDataUploadComponent implements OnInit {
       formData.append('geoFile', this.geoFile);
     }
     // Make service call to upload data.
-    this.uploadService.save(formData).subscribe(
-      () => {
-        this.isUploading = false;
-        this.spinner.hide();
-        this.alertSuccess = true;
-        // setTimeout(() => this.alertSuccess = false, 5000);
-        //this.dataForm.reset();
-        console.log('Image data saved successfully');
-      },
-      error => {
-        this.isUploading = false;
-        this.spinner.hide();
-        this.alertFailure = true;
-        // setTimeout(() => this.alertFailure = false, 5000);
-        console.error('Error - Save image data failed', error);
-      }
-    );
+    const response = this.uploadService.save(formData)
+      .pipe(
+        map((event: any) => {
+          switch (event.type) {
+            case HttpEventType.Sent:
+              console.log('Upload started');
+              break;
+            case HttpEventType.DownloadProgress:
+            // Live stats are also possible for downloads
+            case HttpEventType.UploadProgress:
+              if (event.total) {
+                const progress = Math.round(event.loaded / event.total * 100);
+                if (progress > this.uploadProgress) {
+                  this.uploadProgress = progress;
+                }
+                break;
+              }
+            case HttpEventType.Response:
+              this.isUploading = false;
+              this.spinner.hide();
+              this.alertSuccess = true;
+              this.uploadProgress = 0;
+              // setTimeout(() => this.alertSuccess = false, 5000);
+              //this.dataForm.reset();
+              console.log('Image data saved successfully');
+              break;
+          }
+          return event;
+        }),
+        last(),
+        catchError(err => {
+          const errorMsg = err.message || 'Unable to retrieve data';
+
+          this.isUploading = false;
+          this.spinner.hide();
+          this.alertFailure = true;
+          this.uploadProgress = 0;
+          // setTimeout(() => this.alertFailure = false, 5000);
+          console.error('Error - Save image data failed', err)
+          return throwError(errorMsg);
+        })
+      );
+      console.log(response);
   }
 
   updateGeoFile(event) {
