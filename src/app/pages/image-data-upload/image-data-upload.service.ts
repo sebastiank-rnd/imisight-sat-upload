@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpEvent, HttpRequest, HttpEventType } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpRequest } from '@angular/common/http';
 
 import { throwError, Observable } from 'rxjs';
 import { catchError, tap, map, last } from 'rxjs/operators';
@@ -26,7 +26,7 @@ export class ImageDataUploadService {
       },
     );
 
-    return this.httpClient.request<IA3DataItem>(req);
+    return this.httpClient.request(req);
   }
 
   public fetch(): Observable < IA3DataItem[] > {
